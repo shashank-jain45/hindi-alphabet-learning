@@ -16,10 +16,10 @@ const hindiLetters = [
     description: "First letter of Hindi alphabet",
     audioSrc: "/audio/u.mp4", // In a real app, these would be actual audio files
     "strokeOrder": [
-      "Step 1: Start with a curved stroke resembling '3'.",
-      "Step 2: Add a small horizontal line connecting the '3' shape to the first vertical stroke.",
-      "Step 3: Draw a vertical line on the right.",
-      "Step 4: Add a horizontal bar on top, connecting strokes."
+      "Step 1: Make a big round shape like 3.",
+      "Step 2: Draw a tiny line to join it.",
+      "Step 3: Draw a straight line down.",
+      "Step 4: Put a line on top."
     ],
     "strokes": [
       {
@@ -76,11 +76,11 @@ const hindiLetters = [
     "description": "Second letter of the Hindi alphabet",
     "audioSrc": "/audio/aa.mp4",
     "strokeOrder": [
-      "Step 1: Start with a curved stroke resembling '3'.",
-      "Step 2: Add a small horizontal line connecting the '3' shape to the first vertical stroke.",
-      "Step 3: Draw a vertical line on the right.",
-      "Step 4: Add a horizontal bar on top, connecting strokes.",
-      "Step 5: Draw an additional vertical stroke on the right.",
+      "Step 1: Make a big round shape like 3.",
+      "Step 2: Draw a tiny line to join it.",
+      "Step 3: Draw a straight line down.",
+      "Step 4: Put a line on top.",
+      "Step 5: Draw another straight line down."
     ],
     "strokes": [
       {
@@ -342,274 +342,443 @@ export default function LetterPractice() {
   }, [currentLetterIndex])
 
   // Update the letter practice component to make it more child-friendly
-  return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-purple-50">
-      {/* Header */}
-      <header className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4 flex justify-between items-center rounded-b-lg shadow-md">
-        <h1 className="text-xl font-bold flex items-center">
-          <span className="text-2xl mr-2">✏️</span>
-          अक्षर अभ्यास (Letter Practice)
-        </h1>
-        <div className="flex items-center gap-4">
-          <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
-            Level: Beginner | Letter: {currentLetterIndex + 1}/{hindiLetters.length}
-          </span>
-          <div className="w-40 bg-white/20 rounded-full overflow-hidden">
-            <Progress value={progress} className="h-2" />
-          </div>
-          <span className="bg-white/30 px-2 py-1 rounded-full text-sm font-bold">{progress}%</span>
+//   return (
+//     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-purple-50">
+//       {/* Header */}
+//       <header className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white p-4 flex justify-between items-center rounded-b-lg shadow-md">
+//         <h1 className="text-xl font-bold flex items-center">
+//           <span className="text-2xl mr-2">✏️</span>
+//           अक्षर अभ्यास (Letter Practice)
+//         </h1>
+//         <div className="flex items-center gap-4">
+//           <span className="bg-white/20 px-3 py-1 rounded-full text-sm">
+//             Level: Beginner | Letter: {currentLetterIndex + 1}/{hindiLetters.length}
+//           </span>
+//           <div className="w-40 bg-white/20 rounded-full overflow-hidden">
+//             <Progress value={progress} className="h-2" />
+//           </div>
+//           <span className="bg-white/30 px-2 py-1 rounded-full text-sm font-bold">{progress}%</span>
+//         </div>
+//       </header>
+
+//       {/* Main content */}
+//       <div className="flex flex-1 divide-x divide-slate-200">
+//         {/* Left panel - Letter information */}
+//         <div className="w-1/2 p-6 flex flex-col">
+//           <div className="mb-6">
+//             <h2 className="text-3xl font-bold mb-2 flex items-center">
+//               <span className="text-5xl mr-3">{currentLetter.letter}</span>
+//               <span className="text-slate-500">({currentLetter.transliteration})</span>
+//             </h2>
+//             <p className="text-slate-600 mb-4">{currentLetter.description}. Follow the stroke order shown below.</p>
+
+//             <div className="border-4 border-dashed border-indigo-200 rounded-lg p-8 mb-4 flex items-center justify-center bg-white shadow-inner">
+//               <div className="relative">
+//                 <span className="text-8xl">{currentLetter.letter}</span>
+//                 <div className="absolute inset-0 border-4 border-dashed border-slate-200 rounded-full opacity-50"></div>
+//                 <div className="absolute top-0 right-0 w-4 h-4 bg-pink-200 rounded-full opacity-50"></div>
+//                 <div className="absolute bottom-0 left-0 w-4 h-4 bg-pink-200 rounded-full opacity-50"></div>
+
+//                 {/* Add decorative elements to make it more appealing to children */}
+//                 <div className="absolute -top-4 -left-4 w-8 h-8 bg-yellow-200 rounded-full opacity-70 animate-pulse"></div>
+//                 <div
+//                   className="absolute -bottom-4 -right-4 w-8 h-8 bg-green-200 rounded-full opacity-70 animate-pulse"
+//                   style={{ animationDelay: "0.5s" }}
+//                 ></div>
+//               </div>
+//             </div>
+
+//             <div className="flex gap-2 mb-6">
+//               <Button
+//                 variant="outline"
+//                 className={`flex items-center gap-2 ${isPlaying ? "bg-primary/20" : ""} rounded-full px-4 py-2 border-2`}
+//                 onClick={playPronunciation}
+//                 disabled={isPlaying}
+//               >
+//                 <Volume2 className={`w-5 h-5 ${isPlaying ? "text-primary" : ""}`} />
+//                 {isPlaying ? "Listening..." : "Hear the Sound"}
+//               </Button>
+//               <Button
+//                 variant="outline"
+//                 className={`flex items-center gap-2 ${showAnimation ? "bg-primary/20" : ""} rounded-full px-4 py-2 border-2`}
+//                 onClick={playAnimation}
+//                 disabled={showAnimation}
+//               >
+//                 <Play className="w-5 h-5" />
+//                 {showAnimation ? "Watching..." : "Show Me How"}
+//               </Button>
+//             </div>
+
+//             <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border border-slate-100">
+//               <h3 className="font-semibold mb-2 flex items-center">
+//                 <span className="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center mr-2 text-indigo-600 text-sm">
+//                   1
+//                 </span>
+//                 Stroke Order:
+//               </h3>
+//               <ol className="list-decimal pl-5 space-y-2">
+//                 {currentLetter.strokeOrder.map((step, index) => (
+//                   <li
+//                     key={index}
+//                     className={`p-2 rounded-md ${strokeAccuracy[index] > 0.7
+//                       ? "bg-green-50 text-green-700 font-medium"
+//                       : strokeAccuracy[index] > 0
+//                         ? "bg-amber-50 text-amber-700"
+//                         : "bg-slate-50"
+//                       }`}
+//                   >
+//                     {step}
+//                     {strokeAccuracy[index] > 0.7 && (
+//                       <CheckCircle2 className="inline-block ml-2 w-4 h-4 text-green-600" />
+//                     )}
+//                   </li>
+//                 ))}
+//               </ol>
+//             </div>
+
+//             <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border border-slate-100">
+//               <h3 className="font-semibold mb-2 flex items-center">
+//                 <span className="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center mr-2 text-indigo-600 text-sm">
+//                   2
+//                 </span>
+//                 Your Progress:
+//               </h3>
+//               <Progress value={mastery} className="h-6 mb-4" />
+
+//               <div className="flex justify-between text-sm text-slate-600 mb-2">
+//                 <span className="flex items-center">
+//                   <span className="w-3 h-3 bg-red-200 rounded-full mr-1"></span>
+//                   Beginner
+//                 </span>
+//                 <span className="flex items-center">
+//                   <span className="w-3 h-3 bg-yellow-200 rounded-full mr-1"></span>
+//                   Learning
+//                 </span>
+//                 <span className="flex items-center">
+//                   <span className="w-3 h-3 bg-green-200 rounded-full mr-1"></span>
+//                   Master
+//                 </span>
+//               </div>
+
+//               <div className="flex gap-4 mt-4 justify-center">
+//                 <div className="flex items-center gap-2">
+//                   <div className={`w-4 h-4 rounded-full ${mode === "guided" ? "bg-indigo-600" : "bg-slate-200"}`}></div>
+//                   <span>Guided</span>
+//                 </div>
+//                 <div className="flex items-center gap-2">
+//                   <div
+//                     className={`w-4 h-4 rounded-full ${mode === "practice" ? "bg-indigo-600" : "bg-slate-200"}`}
+//                   ></div>
+//                   <span>Practice</span>
+//                 </div>
+//                 <div className="flex items-center gap-2">
+//                   <div className={`w-4 h-4 rounded-full ${mode === "free" ? "bg-indigo-600" : "bg-slate-200"}`}></div>
+//                   <span>Free</span>
+//                 </div>
+//               </div>
+//             </div>
+
+//             <div className="flex gap-2 justify-center">
+//               <Button
+//                 variant="outline"
+//                 onClick={handlePreviousLetter}
+//                 disabled={currentLetterIndex === 0}
+//                 className="rounded-full px-5"
+//               >
+//                 ← Previous
+//               </Button>
+//               <Button
+//                 variant="outline"
+//                 onClick={handleNextLetter}
+//                 disabled={currentLetterIndex === hindiLetters.length - 1}
+//                 className="rounded-full px-5"
+//               >
+//                 Next →
+//               </Button>
+//             </div>
+//           </div>
+//         </div>
+
+//         {/* Right panel - Drawing area */}
+//         <div className="w-1/2 p-6">
+//           <h2 className="text-2xl font-bold mb-2 flex items-center">
+//             <span className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center mr-2 text-indigo-600 text-sm">
+//               ✏️
+//             </span>
+//             Let's Draw!
+//           </h2>
+//           <p className="text-slate-600 mb-6">
+//             Trace over the dotted lines to learn how to write the letter "{currentLetter.letter}".
+//           </p>
+
+//           <div
+//             className={`border-4 rounded-lg p-4 mb-4 bg-white relative shadow-lg ${feedback === "correct"
+//               ? "border-green-400 ring-4 ring-green-200"
+//               : feedback === "incorrect"
+//                 ? "border-red-400 ring-4 ring-red-200"
+//                 : "border-indigo-200"
+//               }`}
+//           >
+//             {showAnimation ? (
+//               <StrokeAnimation letter={currentLetter.letter} strokes={currentLetter.strokes} />
+//             ) : (
+//               <DrawingCanvas
+//                 ref={canvasRef}
+//                 letter={currentLetter.letter}
+//                 strokes={currentLetter.strokes}
+//                 mode={mode}
+//               />
+//             )}
+
+//             {feedback === "correct" && (
+//               <div className="absolute inset-0 flex items-center justify-center bg-green-50 bg-opacity-80 rounded-lg">
+//                 <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+//                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+//                     <CheckCircle2 className="w-10 h-10 text-green-500" />
+//                   </div>
+//                   <p className="text-2xl font-bold text-green-700">Great job!</p>
+//                   <p className="text-green-600 mb-3">You traced the letter correctly!</p>
+//                   <div className="flex justify-center">
+//                     <Button onClick={() => setFeedback("none")} className="rounded-full">
+//                       Continue
+//                     </Button>
+//                   </div>
+//                 </div>
+//               </div>
+//             )}
+
+//             {feedback === "incorrect" && (
+//               <div className="absolute inset-0 flex items-center justify-center bg-red-50 bg-opacity-80 rounded-lg">
+//                 <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+//                   <p className="text-2xl font-bold text-red-700">Let's try again!</p>
+//                   <p className="text-red-600 mb-3">Follow the dotted lines more carefully.</p>
+//                   <div className="flex justify-center">
+//                     <Button onClick={() => setFeedback("none")} variant="outline" className="rounded-full">
+//                       Try Again
+//                     </Button>
+//                   </div>
+//                 </div>
+//               </div>
+//             )}
+//           </div>
+
+//           <div className="flex gap-2 justify-center mb-6">
+//             <Button variant="outline" className="flex items-center gap-2 rounded-full" onClick={clearCanvas}>
+//               <RefreshCw className="w-4 h-4" />
+//               Clear
+//             </Button>
+//             <Button onClick={handleCheck} className="rounded-full px-6">
+//               Check My Drawing
+//             </Button>
+//           </div>
+
+//           <div className="mt-6">
+//             <Tabs defaultValue="guided" onValueChange={(value) => setMode(value as "guided" | "practice" | "free")}>
+//               <TabsList className="grid w-full grid-cols-3">
+//                 <TabsTrigger value="guided" className="rounded-full">
+//                   Guided Tracing
+//                 </TabsTrigger>
+//                 <TabsTrigger value="practice" className="rounded-full">
+//                   Practice
+//                 </TabsTrigger>
+//                 <TabsTrigger value="free" className="rounded-full">
+//                   Free Drawing
+//                 </TabsTrigger>
+//               </TabsList>
+//               <TabsContent value="guided" className="mt-2">
+//                 <div className="bg-indigo-50 p-3 rounded-lg text-sm text-indigo-700">
+//                   <p>
+//                     Follow the dotted lines to learn the correct stroke order. The app will guide you through each
+//                     stroke.
+//                   </p>
+//                 </div>
+//               </TabsContent>
+//               <TabsContent value="practice" className="mt-2">
+//                 <div className="bg-amber-50 p-3 rounded-lg text-sm text-amber-700">
+//                   <p>Practice drawing the letter with light guidance. Try to remember the correct stroke order.</p>
+//                 </div>
+//               </TabsContent>
+//               <TabsContent value="free" className="mt-2">
+//                 <div className="bg-green-50 p-3 rounded-lg text-sm text-green-700">
+//                   <p>Draw the letter without any guidance. Test your memory of the correct stroke order.</p>
+//                 </div>
+//               </TabsContent>
+//             </Tabs>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   )
+// }
+
+return (
+  <div className="flex flex-col min-h-screen bg-gradient-to-b from-pink-50 to-blue-50">
+    {/* Header */}
+    <header className="bg-gradient-to-r from-purple-600 to-blue-500 text-white p-5 flex justify-between items-center rounded-b-lg shadow-lg">
+      <h1 className="text-2xl font-bold flex items-center">
+        <span className="text-3xl mr-2">🎨</span>
+        अक्षर अभ्यास
+      </h1>
+      <div className="flex items-center gap-4">
+        <span className="bg-white/20 px-4 py-2 rounded-full text-lg">
+          Level: 🐣 | Letter: {currentLetterIndex + 1}/{hindiLetters.length}
+        </span>
+        <div className="w-40 bg-white/30 rounded-full overflow-hidden">
+          <Progress value={progress} className="h-3" />
         </div>
-      </header>
+        <span className="bg-white/40 px-3 py-1 rounded-full text-lg font-bold">{progress}%</span>
+      </div>
+    </header>
 
-      {/* Main content */}
-      <div className="flex flex-1 divide-x divide-slate-200">
-        {/* Left panel - Letter information */}
-        <div className="w-1/2 p-6 flex flex-col">
-          <div className="mb-6">
-            <h2 className="text-3xl font-bold mb-2 flex items-center">
-              <span className="text-5xl mr-3">{currentLetter.letter}</span>
-              <span className="text-slate-500">({currentLetter.transliteration})</span>
-            </h2>
-            <p className="text-slate-600 mb-4">{currentLetter.description}. Follow the stroke order shown below.</p>
+    {/* Main Content */}
+    <div className="flex flex-1 divide-x divide-slate-200">
+      {/* Left - Letter Display */}
+      <div className="w-1/2 p-6 flex flex-col items-center text-center">
+        <h2 className="text-5xl font-bold mb-2 text-purple-600">{currentLetter.letter}</h2>
+        <span className="text-lg text-slate-500">({currentLetter.transliteration})</span>
 
-            <div className="border-4 border-dashed border-indigo-200 rounded-lg p-8 mb-4 flex items-center justify-center bg-white shadow-inner">
-              <div className="relative">
-                <span className="text-8xl">{currentLetter.letter}</span>
-                <div className="absolute inset-0 border-4 border-dashed border-slate-200 rounded-full opacity-50"></div>
-                <div className="absolute top-0 right-0 w-4 h-4 bg-pink-200 rounded-full opacity-50"></div>
-                <div className="absolute bottom-0 left-0 w-4 h-4 bg-pink-200 rounded-full opacity-50"></div>
-
-                {/* Add decorative elements to make it more appealing to children */}
-                <div className="absolute -top-4 -left-4 w-8 h-8 bg-yellow-200 rounded-full opacity-70 animate-pulse"></div>
-                <div
-                  className="absolute -bottom-4 -right-4 w-8 h-8 bg-green-200 rounded-full opacity-70 animate-pulse"
-                  style={{ animationDelay: "0.5s" }}
-                ></div>
-              </div>
-            </div>
-
-            <div className="flex gap-2 mb-6">
-              <Button
-                variant="outline"
-                className={`flex items-center gap-2 ${isPlaying ? "bg-primary/20" : ""} rounded-full px-4 py-2 border-2`}
-                onClick={playPronunciation}
-                disabled={isPlaying}
-              >
-                <Volume2 className={`w-5 h-5 ${isPlaying ? "text-primary" : ""}`} />
-                {isPlaying ? "Listening..." : "Hear the Sound"}
-              </Button>
-              <Button
-                variant="outline"
-                className={`flex items-center gap-2 ${showAnimation ? "bg-primary/20" : ""} rounded-full px-4 py-2 border-2`}
-                onClick={playAnimation}
-                disabled={showAnimation}
-              >
-                <Play className="w-5 h-5" />
-                {showAnimation ? "Watching..." : "Show Me How"}
-              </Button>
-            </div>
-
-            <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border border-slate-100">
-              <h3 className="font-semibold mb-2 flex items-center">
-                <span className="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center mr-2 text-indigo-600 text-sm">
-                  1
-                </span>
-                Stroke Order:
-              </h3>
-              <ol className="list-decimal pl-5 space-y-2">
-                {currentLetter.strokeOrder.map((step, index) => (
-                  <li
-                    key={index}
-                    className={`p-2 rounded-md ${strokeAccuracy[index] > 0.7
-                      ? "bg-green-50 text-green-700 font-medium"
-                      : strokeAccuracy[index] > 0
-                        ? "bg-amber-50 text-amber-700"
-                        : "bg-slate-50"
-                      }`}
-                  >
-                    {step}
-                    {strokeAccuracy[index] > 0.7 && (
-                      <CheckCircle2 className="inline-block ml-2 w-4 h-4 text-green-600" />
-                    )}
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            <div className="mb-6 bg-white p-4 rounded-lg shadow-sm border border-slate-100">
-              <h3 className="font-semibold mb-2 flex items-center">
-                <span className="w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center mr-2 text-indigo-600 text-sm">
-                  2
-                </span>
-                Your Progress:
-              </h3>
-              <Progress value={mastery} className="h-6 mb-4" />
-
-              <div className="flex justify-between text-sm text-slate-600 mb-2">
-                <span className="flex items-center">
-                  <span className="w-3 h-3 bg-red-200 rounded-full mr-1"></span>
-                  Beginner
-                </span>
-                <span className="flex items-center">
-                  <span className="w-3 h-3 bg-yellow-200 rounded-full mr-1"></span>
-                  Learning
-                </span>
-                <span className="flex items-center">
-                  <span className="w-3 h-3 bg-green-200 rounded-full mr-1"></span>
-                  Master
-                </span>
-              </div>
-
-              <div className="flex gap-4 mt-4 justify-center">
-                <div className="flex items-center gap-2">
-                  <div className={`w-4 h-4 rounded-full ${mode === "guided" ? "bg-indigo-600" : "bg-slate-200"}`}></div>
-                  <span>Guided</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div
-                    className={`w-4 h-4 rounded-full ${mode === "practice" ? "bg-indigo-600" : "bg-slate-200"}`}
-                  ></div>
-                  <span>Practice</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className={`w-4 h-4 rounded-full ${mode === "free" ? "bg-indigo-600" : "bg-slate-200"}`}></div>
-                  <span>Free</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-2 justify-center">
-              <Button
-                variant="outline"
-                onClick={handlePreviousLetter}
-                disabled={currentLetterIndex === 0}
-                className="rounded-full px-5"
-              >
-                ← Previous
-              </Button>
-              <Button
-                variant="outline"
-                onClick={handleNextLetter}
-                disabled={currentLetterIndex === hindiLetters.length - 1}
-                className="rounded-full px-5"
-              >
-                Next →
-              </Button>
-            </div>
-          </div>
+        <div className="relative mt-4 p-6 bg-white rounded-xl shadow-lg border-4 border-dashed border-indigo-300">
+          <span className="text-8xl">{currentLetter.letter}</span>
+          <div className="absolute -top-4 -left-4 w-10 h-10 bg-yellow-300 rounded-full animate-bounce"></div>
+          <div className="absolute -bottom-4 -right-4 w-10 h-10 bg-green-300 rounded-full animate-bounce"></div>
         </div>
 
-        {/* Right panel - Drawing area */}
-        <div className="w-1/2 p-6">
-          <h2 className="text-2xl font-bold mb-2 flex items-center">
-            <span className="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center mr-2 text-indigo-600 text-sm">
-              ✏️
-            </span>
-            Let's Draw!
-          </h2>
-          <p className="text-slate-600 mb-6">
-            Trace over the dotted lines to learn how to write the letter "{currentLetter.letter}".
-          </p>
+        <div className="flex gap-3 mt-6">
+          <Button onClick={playPronunciation} className="bg-blue-400 text-white rounded-full px-6 py-3">
+            🔊 Hear Sound
+          </Button>
+          <Button onClick={playAnimation} className="bg-purple-400 text-white rounded-full px-6 py-3">
+            ▶ Show Me
+          </Button>
+        </div>
 
-          <div
-            className={`border-4 rounded-lg p-4 mb-4 bg-white relative shadow-lg ${feedback === "correct"
-              ? "border-green-400 ring-4 ring-green-200"
-              : feedback === "incorrect"
-                ? "border-red-400 ring-4 ring-red-200"
-                : "border-indigo-200"
-              }`}
-          >
-            {showAnimation ? (
-              <StrokeAnimation letter={currentLetter.letter} strokes={currentLetter.strokes} />
-            ) : (
-              <DrawingCanvas
-                ref={canvasRef}
-                letter={currentLetter.letter}
-                strokes={currentLetter.strokes}
-                mode={mode}
-              />
-            )}
+        <div className="mt-6 w-full">
+          <h3 className="text-xl font-semibold text-indigo-600">✏️ Stroke Order:</h3>
+          <ol className="list-decimal pl-5 mt-2 space-y-2">
+            {currentLetter.strokeOrder.map((step, index) => (
+              <li key={index} className="text-lg bg-white p-3 rounded-md border-l-4 border-indigo-300">
+                {step}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="flex gap-4 justify-center mt-6">
+      <Button
+        variant="outline"
+        onClick={handlePreviousLetter}
+        disabled={currentLetterIndex === 0}
+        className="rounded-full px-6 py-3 text-lg font-bold bg-yellow-300 hover:bg-yellow-400 active:scale-95 shadow-lg transition-all flex items-center gap-2"
+      >
+        <span className="text-2xl">⬅️</span> Back
+      </Button>
 
-            {feedback === "correct" && (
-              <div className="absolute inset-0 flex items-center justify-center bg-green-50 bg-opacity-80 rounded-lg">
-                <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <CheckCircle2 className="w-10 h-10 text-green-500" />
-                  </div>
-                  <p className="text-2xl font-bold text-green-700">Great job!</p>
-                  <p className="text-green-600 mb-3">You traced the letter correctly!</p>
-                  <div className="flex justify-center">
-                    <Button onClick={() => setFeedback("none")} className="rounded-full">
-                      Continue
-                    </Button>
-                  </div>
+      <Button
+        variant="outline"
+        onClick={handleNextLetter}
+        disabled={currentLetterIndex === hindiLetters.length - 1}
+        className="rounded-full px-6 py-3 text-lg font-bold bg-green-300 hover:bg-green-400 active:scale-95 shadow-lg transition-all flex items-center gap-2"
+      >
+        Next <span className="text-2xl">➡️</span>
+      </Button>
+</div>
+
+      </div>
+
+      {/* Right - Drawing Area */}
+      <div className="w-1/2 p-6">
+        <h2 className="text-2xl font-bold mb-2 text-indigo-600">Let's Draw! 🎨</h2>
+        <p className="text-lg text-slate-600 mb-4">Trace over the lines and learn the letter.</p>
+
+        <div className={`border-4 rounded-lg p-4 bg-white shadow-lg relative ${feedback === "correct" ? "border-green-400 ring-4 ring-green-300" : feedback === "incorrect" ? "border-red-400 ring-4 ring-red-300" : "border-indigo-300"}`}>
+          {showAnimation ? (
+            <StrokeAnimation letter={currentLetter.letter} strokes={currentLetter.strokes} />
+          ) : (
+            <DrawingCanvas ref={canvasRef} letter={currentLetter.letter} strokes={currentLetter.strokes} mode={mode} />
+          )}
+
+          {/* {feedback === "correct" && (
+            <div className="absolute inset-0 flex items-center justify-center bg-green-50 bg-opacity-80 rounded-lg">
+              <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+                <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-3 animate-ping">
+                  ✅
                 </div>
+                <p className="text-2xl font-bold text-green-700">Yay! 🎉</p>
+                <p className="text-green-600 mb-3">You got it right!</p>
               </div>
-            )}
+            </div>
+          )} */}
+          {feedback === "correct" && (
+  <div className="absolute inset-0 flex items-center justify-center bg-green-50 bg-opacity-80 rounded-lg">
+    <div className="bg-white p-6 rounded-lg shadow-lg text-center relative">
+      {/* Sparkles Effect */}
+      {Array.from({ length: 10 }).map((_, index) => (
+        <div
+          key={index}
+          className="sparkle"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 0.5}s`,
+          }}
+        />
+      ))}
 
-            {feedback === "incorrect" && (
-              <div className="absolute inset-0 flex items-center justify-center bg-red-50 bg-opacity-80 rounded-lg">
-                <div className="bg-white p-6 rounded-lg shadow-lg text-center">
-                  <p className="text-2xl font-bold text-red-700">Let's try again!</p>
-                  <p className="text-red-600 mb-3">Follow the dotted lines more carefully.</p>
-                  <div className="flex justify-center">
-                    <Button onClick={() => setFeedback("none")} variant="outline" className="rounded-full">
-                      Try Again
-                    </Button>
-                  </div>
-                </div>
+      {/* Celebration Message */}
+      <div className="w-16 h-16 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-3 animate-bounce">
+        ✅
+      </div>
+      <p className="text-2xl font-bold text-green-700">Yay! 🎉</p>
+      <p className="text-green-600 mb-3">You got it right!</p>
+
+      {/* Reward: Stars & Stickers */}
+      <div className="flex justify-center gap-2 text-yellow-400 text-3xl">
+        ⭐ ⭐ ⭐
+      </div>
+      <p className="text-lg mt-2 font-semibold">You earned a 🦄 Unicorn Sticker!</p>
+    </div>
+  </div>
+)}
+
+
+          {feedback === "incorrect" && (
+            <div className="absolute inset-0 flex items-center justify-center bg-red-50 bg-opacity-80 rounded-lg">
+              <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+                <p className="text-2xl font-bold text-red-700">Oops! 😲</p>
+                <p className="text-red-600 mb-3">Try again, follow the strokes.</p>
               </div>
-            )}
-          </div>
+            </div>
+          )}
+        </div>
 
-          <div className="flex gap-2 justify-center mb-6">
-            <Button variant="outline" className="flex items-center gap-2 rounded-full" onClick={clearCanvas}>
-              <RefreshCw className="w-4 h-4" />
-              Clear
-            </Button>
-            <Button onClick={handleCheck} className="rounded-full px-6">
-              Check My Drawing
-            </Button>
-          </div>
+        <div className="flex gap-3 justify-center mt-6">
+          <Button variant="outline" onClick={clearCanvas} className="bg-red-400 text-white px-6 py-3 rounded-full">
+            🔄 Clear
+          </Button>
+          <Button onClick={handleCheck} className="bg-green-500 text-white px-6 py-3 rounded-full">
+            ✅ Check
+          </Button>
+        </div>
 
-          <div className="mt-6">
-            <Tabs defaultValue="guided" onValueChange={(value) => setMode(value as "guided" | "practice" | "free")}>
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="guided" className="rounded-full">
-                  Guided Tracing
-                </TabsTrigger>
-                <TabsTrigger value="practice" className="rounded-full">
-                  Practice
-                </TabsTrigger>
-                <TabsTrigger value="free" className="rounded-full">
-                  Free Drawing
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="guided" className="mt-2">
-                <div className="bg-indigo-50 p-3 rounded-lg text-sm text-indigo-700">
-                  <p>
-                    Follow the dotted lines to learn the correct stroke order. The app will guide you through each
-                    stroke.
-                  </p>
-                </div>
-              </TabsContent>
-              <TabsContent value="practice" className="mt-2">
-                <div className="bg-amber-50 p-3 rounded-lg text-sm text-amber-700">
-                  <p>Practice drawing the letter with light guidance. Try to remember the correct stroke order.</p>
-                </div>
-              </TabsContent>
-              <TabsContent value="free" className="mt-2">
-                <div className="bg-green-50 p-3 rounded-lg text-sm text-green-700">
-                  <p>Draw the letter without any guidance. Test your memory of the correct stroke order.</p>
-                </div>
-              </TabsContent>
-            </Tabs>
-          </div>
+        <div className="mt-6">
+          <Tabs defaultValue="guided" onValueChange={(value) => setMode(value as "guided" | "practice" | "free")}>
+            <TabsList className="grid w-full grid-cols-3 bg-indigo-100 rounded-full p-1">
+              <TabsTrigger value="guided" className="rounded-full text-lg">
+                🏆 Guided
+              </TabsTrigger>
+              <TabsTrigger value="practice" className="rounded-full text-lg">
+                ✍ Practice
+              </TabsTrigger>
+              <TabsTrigger value="free" className="rounded-full text-lg">
+                🎨 Free Draw
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
         </div>
       </div>
     </div>
-  )
-}
+  </div>
+)
+          }
 
 
 

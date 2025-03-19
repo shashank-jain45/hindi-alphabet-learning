@@ -761,10 +761,10 @@ const DrawingCanvas = forwardRef(({ letter, strokes, mode }: DrawingCanvasProps,
     const canvas = canvasRef.current
     if (!canvas) return
 
-    // Draw guide letter based on mode
-    ctx.font = "120px Arial"
-    ctx.textAlign = "center"
-    ctx.textBaseline = "middle"
+    // // Draw guide letter based on mode
+    // ctx.font = "120px Arial"
+    // ctx.textAlign = "center"
+    // ctx.textBaseline = "middle"
 
     if (mode === "guided") {
       // Fully visible guide for guided mode
@@ -779,13 +779,13 @@ const DrawingCanvas = forwardRef(({ letter, strokes, mode }: DrawingCanvasProps,
 
     ctx.fillText(letter, canvas.width / 2, canvas.height / 2)
 
-    // Draw dotted circle guide
-    ctx.beginPath()
-    ctx.arc(canvas.width / 2, canvas.height / 2, 100, 0, Math.PI * 2)
-    ctx.strokeStyle = "rgba(180, 180, 240, 0.5)"
-    ctx.setLineDash([5, 5])
-    ctx.lineWidth = 2
-    ctx.stroke()
+    // // Draw dotted circle guide
+    // ctx.beginPath()
+    // ctx.arc(canvas.width / 2, canvas.height / 2, 100, 0, Math.PI * 2)
+    // ctx.strokeStyle = "rgba(180, 180, 240, 0.5)"
+    // ctx.setLineDash([5, 5])
+    // ctx.lineWidth = 2
+    // ctx.stroke()
 
     // Draw stroke guides based on mode
     if (mode === "guided" || mode === "practice") {
